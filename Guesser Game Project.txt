@@ -1,0 +1,584 @@
+Assignment 2 :-         Name:- Khanijam Venkata Sai Narasimha Rao
+======================================================================
+
+Q)  Improve the guesser game project which we have discussed in live class on 30th july class. 
+      Add the maximum feature you could add to it.
+
+code:-
+--------
+
+import java.util.Scanner;
+class Guesser
+{
+	int guesserNum;
+	public int guesserGuess()
+	{
+		Scanner sc=new Scanner(System.in);
+		System.out.println("Guesser kindly guess the number in range b/w 0 to 10: ");
+		guesserNum=sc.nextInt();
+		if(guesserNum<0||guesserNum>10)
+		{
+			System.err.println("********** ERROR OCCURED GAME ENDED **********");
+			System.exit(0);
+		}
+		return guesserNum;
+	}	
+}
+class Player1
+{
+	int player1GuessNum;	
+	public int player1Guess()
+	{
+		Scanner sc=new Scanner(System.in);
+		System.out.println("Player1 kindly guess the number: ");
+		player1GuessNum=sc.nextInt();
+		
+		if(player1GuessNum<0||player1GuessNum>10)
+		{
+			System.err.println("********** ERROR OCCURED PLAYER PLEASE GUESS THE NUMBER IN THE RANGE OF 0 TO 10 **********");			
+		}
+		return player1GuessNum;		
+	}
+}
+class Player2
+{
+	int player2GuessNum;	
+	public int player2Guess()
+	{
+		Scanner sc=new Scanner(System.in);
+		System.out.println("Player2 kindly guess the number: ");
+		player2GuessNum=sc.nextInt();
+		
+		if(player2GuessNum<0||player2GuessNum>10)
+		{
+			System.err.println("********** ERROR OCCURED PLAYER PLEASE GUESS THE NUMBER IN THE RANGE OF 0 TO 10 **********");
+		}
+		return player2GuessNum;
+	}
+}
+class Player3
+{
+	int player3GuessNum;	
+	public int player3Guess()
+	{
+		Scanner sc=new Scanner(System.in);
+		System.out.println("Player3 kindly guess the number: ");
+		player3GuessNum=sc.nextInt();
+		if(player3GuessNum<0||player3GuessNum>10)
+		{
+			System.err.println("********** ERROR OCCURED PLAYER PLEASE GUESS THE NUMBER IN THE RANGE OF 0 TO 10 **********");
+		}
+		return player3GuessNum;
+	}
+}
+class Umpire
+{
+	int collectGuesserNum;
+	int collectPlayer1Num;
+	int collectPlayer2Num;
+	int collectPlayer3Num;
+	int entryLevelCount=0;
+	int semiLevelCount=0;
+	public void collectGuesserNum()
+	{
+		Guesser g=new Guesser();
+	    collectGuesserNum=g.guesserGuess();
+	}
+	public void collectPlayersNum()
+	{
+		Player1 p1=new Player1();
+		Player2 p2=new Player2();
+		Player3 p3=new Player3();		
+		collectPlayer1Num=p1.player1Guess();
+		collectPlayer2Num=p2.player2Guess();
+		collectPlayer3Num=p3.player3Guess();	
+	}
+    public void entryLevelCompare()
+    {
+    	if(collectGuesserNum==collectPlayer1Num)
+    	{
+    		entryLevelCount=1;
+    		if(collectGuesserNum==collectPlayer2Num&&collectGuesserNum==collectPlayer3Num)
+    		{
+    			entryLevelCount+=2;
+    			System.out.println();    			
+    			System.out.println(" ********** CONGRATULATIONS TO ALL PLAYERS YOU HAVE WON IN THE ENTRY LEVEL ROUND ********** ");
+                
+    		}
+    		else if(collectGuesserNum==collectPlayer2Num)
+    		{
+    			entryLevelCount++;
+    			System.out.println();
+    			System.out.println(" ********** CONGRATULATIONS PLAYER1 & PLAYER2 YOU HAVE WON IN THE ENTRY LEVEL ROUNDER ********** ");
+    			System.out.println();
+    			System.out.println("                             ********** PLAYER3 ELMINATED **********                             ");
+    		}
+    		else if(collectGuesserNum==collectPlayer3Num)
+    		{
+    			entryLevelCount++;
+    			System.out.println();
+    			System.out.println(" ********** CONGRATULATIONS PLAYER1 & PLAYER3 YOU HAVE WON IN THE ENTRY LEVEL ROUND **********   ");
+    			System.out.println();
+    			System.out.println("                             ********** PLAYER2 ELMINATED **********                             ");
+    		}
+    		else
+        	{
+        		System.out.println(" ********** CONGRATULATIONS PLAYER1 YOU WON UNIANIMOUSLY IN THE ENTRY LEVEL ROUND **********                  ");
+        		System.out.println();
+        		System.out.println("                             ********** PLAYER2 & PLAYER3 ELMINATED **********                   ");
+        	}
+    		
+    	}
+    	else if(collectGuesserNum==collectPlayer2Num)
+    	{
+    		entryLevelCount=1;
+    		if(collectGuesserNum==collectPlayer3Num)
+    		{
+    			entryLevelCount++;
+    			System.out.println();
+    			System.out.println(" ********** CONGRATULATIONS PLAYER2 & PLAYER3 YOU HAVE WON IN THE ENTRY LEVEL ROUND ********** ");
+    			System.out.println();
+    			System.out.println("                             ********** PLAYER1 ELMINATED **********                             ");
+    		}
+    		else
+        	{
+    			System.out.println();
+        		System.out.println(" ********** CONGRATULATIONS PLAYER2 YOU WON IN THE ENTRY LEVEL ROUND ********** ");
+        		System.out.println();
+        		System.out.println("                             ********** PLAYER1 & PLAYER3 ELMINATED **********                             ");
+        	}
+    	}
+    	
+    	else if(collectGuesserNum==collectPlayer3Num)
+    	{
+    		entryLevelCount++;
+    		System.out.println();
+    		System.out.println(" ********** CONGRATULATIONS PLAYER3 YOU WON IN THE ENTRY LEVEL ROUND ********** ");
+    		System.out.println();
+    		System.out.println("                             ********** PLAYER1 & PLAYER2 ELMINATED **********                             ");
+    	}
+    	else
+    	{
+    		System.out.println();
+    		System.err.println(" ********** GAME LOST TRY AGAIN ********** ");
+    		System.exit(0);
+    	}
+    	System.out.println();
+    	System.out.println(" ********** WELCOME TO SEMIFINALS ********** ");
+    	System.out.println();
+    }    
+    public void semiFinalCompare()
+    {
+    	if(entryLevelCount==3)
+    	{
+    		Guesser g=new Guesser();
+    	    collectGuesserNum=g.guesserGuess();    	    
+    	    Player1 p1=new Player1();
+    		Player2 p2=new Player2();
+    		Player3 p3=new Player3();    		
+    		collectPlayer1Num=p1.player1Guess();
+    		collectPlayer2Num=p2.player2Guess();
+    		collectPlayer3Num=p3.player3Guess();    		   		
+    		if(collectGuesserNum==collectPlayer1Num)
+        	{
+    			semiLevelCount=1;
+        		if(collectGuesserNum==collectPlayer2Num&&collectGuesserNum==collectPlayer3Num)
+        		{
+        			semiLevelCount+=2;
+        			System.out.println();
+        			System.out.println(" ********** CONGRATULATIONS TO ALL PLAYERS YOU HAVE WON IN THE SEMIFINAL ROUND ********** ");
+        			System.out.println();
+        		}
+        		else if(collectGuesserNum==collectPlayer2Num)
+        		{
+        			semiLevelCount++;
+        			System.out.println();
+        			System.out.println(" ********** CONGRATULATIONS PLAYER1 & PLAYER2 YOU HAVE WON IN THE SEMIFINAL ROUND ********** ");
+        			System.out.println();
+        			System.out.println("                             ********** PLAYER3 ELMINATED **********                             ");
+        		}
+        		else if(collectGuesserNum==collectPlayer3Num)
+        		{
+        			semiLevelCount++;
+        			System.out.println();
+        			System.out.println(" ********** CONGRATULATIONS PLAYER1 & PLAYER3 YOU HAVE WON IN THE SEMIFINAL ROUND ********** ");
+        			System.out.println();
+        			System.out.println("                             ********** PLAYER2 ELMINATED **********                             ");
+        		}
+        		else
+            	{
+        			System.out.println();
+            		System.out.println(" ********** CONGRATULATIONS PLAYER1 YOU WON IN THE SEMIFINAL ROUND ********** ");
+            		System.out.println();
+            		System.out.println("                             ********** PLAYER2 & PLAYER3 ELMINATED **********                             ");
+            	}
+        	}
+        	else if(collectGuesserNum==collectPlayer2Num)
+        	{
+        		semiLevelCount=1;
+        		if(collectGuesserNum==collectPlayer3Num)
+        		{
+        			semiLevelCount++;
+        			System.out.println();
+        			System.out.println(" ********** CONGRATULATIONS PLAYER2 & PLAYER3 YOU WON IN THE SEMIFINAL ROUND ********** ");
+        			System.out.println();
+        			System.out.println("                             ********** PLAYER1 ELMINATED **********                             ");
+        		}
+        		else
+            	{
+        			System.out.println();
+            		System.out.println(" ********** CONGRATULATIONS PLAYER2 YOU WON IN THE SEMIFINAL ROUND ********** ");
+            		System.out.println();
+            		System.out.println("                             ********** PLAYER1 & PLAYER3 ELMINATED **********                             ");
+            	}
+        	}       	
+        	else if(collectGuesserNum==collectPlayer3Num)
+        	{
+        		semiLevelCount=1;
+        		System.out.println();
+        		System.out.println(" ********** CONGRATULATIONS PLAYER3 YOU WON IN THE SEMIFINAL ROUND ********** ");
+        		System.out.println();
+        		System.out.println("                             ********** PLAYER1 & PLAYER2 ELMINATED **********                             ");
+        	}
+        	else
+        	{
+        		System.out.println();
+        		System.err.println(" ********** GAME LOST TRY AGAIN ********** ");
+        		System.exit(0);
+        	}
+    		System.out.println();
+    		System.out.println(" ********** WELCOME TO FINALS ********** ");  
+    		System.out.println();
+    	}
+    	else if(entryLevelCount==2)
+    	{
+    		Guesser g=new Guesser();
+    	    collectGuesserNum=g.guesserGuess();    	    
+    	    Player1 p1=new Player1();
+    		Player2 p2=new Player2();   		
+    		collectPlayer1Num=p1.player1Guess();
+    		collectPlayer2Num=p2.player2Guess();    		
+    		if(collectGuesserNum==collectPlayer1Num)
+        	{
+    			semiLevelCount=1;
+        		if(collectGuesserNum==collectPlayer2Num)
+        		{
+        			semiLevelCount++;
+        			System.out.println();
+        			System.out.println(" ********** CONGRATULATIONS TO ALL PLAYERS YOU WON IN THE SEMIFINAL ROUND ********** ");
+        		}  
+        		else
+            	{
+        			System.out.println();
+            		System.out.println(" ********** CONGRATULATIONS PLAYER1 YOU WON IN THE SEMIFINAL ROUND ********** ");
+            		System.out.println();
+            		System.out.println("                             ********** PLAYER2 ELMINATED **********                             ");
+            	}
+        	}
+    		else if(collectGuesserNum==collectPlayer2Num)
+        	{
+    			semiLevelCount++;
+    			System.out.println();
+        		System.out.println(" ********** CONGRATULATIONS PLAYER2 YOU WON IN THE SEMIFINAL ROUND ********** ");
+        		System.out.println();
+        		System.out.println("                             ********** PLAYER1 ELMINATED **********                             ");
+        	}
+    		else
+    		{
+    			System.out.println();
+    			System.err.println(" ********** GAME LOST TRY AGAIN ********** ");
+    			System.exit(0);
+    		}
+    		System.out.println();
+    		System.out.println(" ********** WELCOME TO FINALS ********** ");
+    		System.out.println();
+    	}
+    	else if(entryLevelCount==1)
+    	{
+    		Guesser g=new Guesser();
+    	    collectGuesserNum=g.guesserGuess();
+    	    
+    	    Player1 p1=new Player1();
+    	    collectPlayer1Num=p1.player1Guess();
+    	    if(collectGuesserNum==collectPlayer1Num)
+    	    {
+    	    	semiLevelCount++;
+    	    	System.out.println();
+    	    	System.out.println(" ********** CONGRATULATIONS YOU HAVE WON IN THE SEMIFINAL ROUND ********** ");
+    	    	System.out.println();
+    	    }
+    	    else
+    	    {
+    	    	System.out.println();
+    	    	System.err.println(" ********** GAME LOST TRY AGAIN ********** ");
+    	    	System.exit(0);
+    	    }
+    	    System.out.println();
+    	    System.out.println(" ********** WELCOME TO FINALS ********** ");
+    	}   	
+    }
+    public void finalsCompare()
+    {
+    	if(semiLevelCount==3)
+    	{
+    		Guesser g=new Guesser();
+    	    collectGuesserNum=g.guesserGuess();    	    
+    	    Player1 p1=new Player1();
+    		Player2 p2=new Player2();
+    		Player3 p3=new Player3();    		
+    		collectPlayer1Num=p1.player1Guess();
+    		collectPlayer2Num=p2.player2Guess();
+    		collectPlayer3Num=p3.player3Guess();    		   		
+    		if(collectGuesserNum==collectPlayer1Num)
+        	{
+        		if(collectGuesserNum==collectPlayer2Num&&collectGuesserNum==collectPlayer3Num)
+        		{
+        			System.out.println();
+        			System.out.println(" ********** CONGRATULATIONS TO ALL PLAYERS YOU HAVE WON IN THE FINAL ROUND ********** ");
+        			System.out.println();
+        		}
+        		else if(collectGuesserNum==collectPlayer2Num)
+        		{
+        			System.out.println();
+        			System.out.println(" ********** CONGRATULATIONS PLAYER1 & PLAYER2 YOU HAVE WON IN THE FINAL ROUND ********** ");
+        			System.out.println();
+        			System.out.println("                             ********** PLAYER3 ELMINATED **********                             ");
+        		}
+        		else if(collectGuesserNum==collectPlayer3Num)
+        		{
+        			System.out.println();
+        			System.out.println(" ********** CONGRATULATIONS PLAYER1 & PLAYER3 YOU HAVE WON IN THE FINAL ROUND ********** ");
+        			System.out.println();
+        			System.out.println("                             ********** PLAYER2 ELMINATED **********                             ");
+        		}
+        		else
+            	{
+        			System.out.println();
+            		System.out.println(" ********** CONGRATULATIONS PLAYER1 YOU WON IN THE FINAL ROUND ********** ");
+            		System.out.println();
+            		System.out.println("                             ********** PLAYER2 & PLAYER3 ELMINATED **********                             ");
+            	}
+        	}
+        	else if(collectGuesserNum==collectPlayer2Num)
+        	{
+        		if(collectGuesserNum==collectPlayer3Num)
+        		{
+        			System.out.println();
+        			System.out.println(" ********** CONGRATULATIONS PLAYER2 & PLAYER3 YOU WON IN THE FINAL ROUND ********** ");
+        			System.out.println();
+        			System.out.println("                             ********** PLAYER1 ELMINATED **********                             ");
+        		}
+        		else
+            	{
+        			System.out.println();
+            		System.out.println(" ********** CONGRATULATIONS PLAYER2 YOU WON IN THE FINAL ROUND ********** ");
+            		System.out.println();
+            		System.out.println("                             ********** PLAYER1 & PLAYER3 ELMINATED **********                             ");
+            	}
+        	}       	
+        	else if(collectGuesserNum==collectPlayer3Num)
+        	{
+        		System.out.println();
+        		System.out.println(" ********** CONGRATULATIONS PLAYER3 YOU WON IN THE FINAL ROUND ********** ");
+        		System.out.println();
+        		System.out.println("                             ********** PLAYER1 & PLAYER2 ELMINATED **********                             ");
+        	}
+        	else
+        	{
+        		System.out.println();
+        		System.err.println(" ********** GAME LOST TRY AGAIN ********** ");
+        		System.exit(0);
+        	}
+    	}
+    	else if(semiLevelCount==2)
+    	{
+    		Guesser g=new Guesser();
+    	    collectGuesserNum=g.guesserGuess();    	    
+    	    Player1 p1=new Player1();
+    		Player2 p2=new Player2();   		
+    		collectPlayer1Num=p1.player1Guess();
+    		collectPlayer2Num=p2.player2Guess();    		
+    		if(collectGuesserNum==collectPlayer1Num)
+        	{
+        		if(collectGuesserNum==collectPlayer2Num)
+        		{
+        			System.out.println();
+        			System.out.println(" ********** CONGRATULATIONS TO ALL PLAYERS YOU WON IN THE FINAL ROUND ********** ");
+        		}  
+        		else
+            	{
+        			System.out.println();
+            		System.out.println(" ********** CONGRATULATIONS PLAYER1 YOU WON IN THE FINAL ROUND ********** ");
+            		System.out.println();
+            		System.out.println("                             ********** PLAYER2 ELMINATED **********                             ");
+            	}
+        	}
+    		else if(collectGuesserNum==collectPlayer2Num)
+        	{
+    			System.out.println();
+        		System.out.println(" ********** CONGRATULATIONS PLAYER2 YOU WON IN THE FINAL ROUND ********** ");
+        		System.out.println();
+        		System.out.println("                             ********** PLAYER1 ELMINATED **********                             ");
+        	}
+    		else
+    		{
+    			System.out.println();
+    			System.err.println(" ********** GAME LOST TRY AGAIN ********** ");
+    			System.exit(0);
+    		}
+    	}
+    	else if(semiLevelCount==1)
+    	{
+    		Guesser g=new Guesser();
+    	    collectGuesserNum=g.guesserGuess();
+    	    
+    	    Player1 p1=new Player1();
+    	    collectPlayer1Num=p1.player1Guess();
+    	    if(collectGuesserNum==collectPlayer1Num)
+    	    {
+    	    	System.out.println();
+    	    	System.out.println(" ********** CONGRATULATIONS YOU HAVE WON IN THE FINAL ROUND ********** ");
+    	    	System.out.println();
+    	    }
+    	    else
+    	    {
+    	    	System.out.println();
+    	    	System.err.println(" ********** GAME LOST TRY AGAIN ********** ");
+    	    	System.exit(0);
+    	    }
+    	}
+    }
+}
+public class Game 
+{
+	public static void main(String[] args) 
+	{
+		Umpire u=new Umpire();
+		u.collectGuesserNum();
+		u.collectPlayersNum();
+		u.entryLevelCompare();
+		u.semiFinalCompare();
+		u.finalsCompare();
+	}
+}
+
+===================================================================================================================
+
+Output-1:-
+------------
+
+Guesser kindly guess the number in range b/w 0 to 10: 
+11
+********** ERROR OCCURED GAME ENDED **********
+
+=====================================================================================================================
+
+Output-2:-
+-------------
+
+Guesser kindly guess the number in range b/w 0 to 10: 
+5
+Player1 kindly guess the number: 
+6
+Player2 kindly guess the number: 
+1
+Player3 kindly guess the number: 
+2
+ ********** GAME LOST TRY AGAIN ********** 
+
+=========================================================================================================================
+
+Output-3:-
+-------------
+
+Guesser kindly guess the number in range b/w 0 to 10: 
+5
+Player1 kindly guess the number: 
+11
+********** ERROR OCCURED PLAYER PLEASE GUESS THE NUMBER IN THE RANGE OF 0 TO 10 **********
+Player2 kindly guess the number: 
+25
+********** ERROR OCCURED PLAYER PLEASE GUESS THE NUMBER IN THE RANGE OF 0 TO 10 **********
+Player3 kindly guess the number: 
+26
+********** ERROR OCCURED PLAYER PLEASE GUESS THE NUMBER IN THE RANGE OF 0 TO 10 **********
+
+ ********** GAME LOST TRY AGAIN ********** 
+
+==========================================================================================================================
+
+
+Output-4:-
+--------------
+
+Guesser kindly guess the number in range b/w 0 to 10: 
+5
+Player1 kindly guess the number: 
+5
+Player2 kindly guess the number: 
+5
+Player3 kindly guess the number: 
+6
+
+ ********** CONGRATULATIONS PLAYER1 & PLAYER2 YOU HAVE WON IN THE ENTRY LEVEL ROUNDER ********** 
+
+                             ********** PLAYER3 ELMINATED **********                             
+
+ ********** WELCOME TO SEMIFINALS ********** 
+
+Guesser kindly guess the number in range b/w 0 to 10: 
+6
+Player1 kindly guess the number: 
+7
+Player2 kindly guess the number: 
+6
+
+ ********** CONGRATULATIONS PLAYER2 YOU WON IN THE SEMIFINAL ROUND ********** 
+
+                             ********** PLAYER1 ELMINATED **********                             
+
+ ********** WELCOME TO FINALS ********** 
+
+Guesser kindly guess the number in range b/w 0 to 10: 
+3
+Player1 kindly guess the number: 
+3
+
+ ********** CONGRATULATIONS YOU HAVE WON IN THE FINAL ROUND ********** 
+
+====================================================================================================================
+
+Output-5:-
+--------------
+
+Guesser kindly guess the number in range b/w 0 to 10: 
+8
+Player1 kindly guess the number: 
+1
+Player2 kindly guess the number: 
+4
+Player3 kindly guess the number: 
+8
+
+ ********** CONGRATULATIONS PLAYER3 YOU WON IN THE ENTRY LEVEL ROUND ********** 
+
+                             ********** PLAYER1 & PLAYER2 ELMINATED **********                             
+
+ ********** WELCOME TO SEMIFINALS ********** 
+
+Guesser kindly guess the number in range b/w 0 to 10: 
+5
+Player1 kindly guess the number: 
+5
+
+ ********** CONGRATULATIONS YOU HAVE WON IN THE SEMIFINAL ROUND ********** 
+
+
+ ********** WELCOME TO FINALS ********** 
+Guesser kindly guess the number in range b/w 0 to 10: 
+4
+Player1 kindly guess the number: 
+8
+
+ ********** GAME LOST TRY AGAIN ********** 
+===============================================================================
